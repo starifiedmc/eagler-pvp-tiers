@@ -60,7 +60,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "axe-pvp": {
@@ -73,7 +73,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "sword-pvp": {
@@ -86,7 +86,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "smp": {
@@ -99,7 +99,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "diamond-smp": {
@@ -112,7 +112,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "uhc": {
@@ -125,7 +125,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "pot-pvp": {
@@ -138,7 +138,7 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   },
 
   "neth-op": {
@@ -151,9 +151,10 @@ const TIER_DATA = {
     HT4: [],
     LT4: [],
     HT5: [],
-    LT5: []
+    LT5: [],
   }
 };
+
 
 
 // ===============================
