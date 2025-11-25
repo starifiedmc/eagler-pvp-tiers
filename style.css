@@ -1,1 +1,138 @@
+:root {
+  --bg: #050914;
+  --surface: #0b1020;
+  --surface-soft: #101729;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --text-main: #f9fbff;
+  --text-muted: #9aa3b7;
+  --accent: #3aa6ff;
+  --tier-strong: #222c4b;
+  --tier-soft: #141a30;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top, #17233a 0, #050914 55%);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 18px 16px 32px;
+}
+
+/* Top bar */
+
+.top-bar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.top-bar h1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+
+/* Gamemode tabs */
+
+.gamemode-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.gamemode-tab {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: rgba(11, 16, 32, 0.9);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.gamemode-tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.gamemode-tab.active {
+  color: var(--text-main);
+  background: linear-gradient(135deg, #3aa6ff, #7d5bff);
+  border-color: transparent;
+}
+
+/* Tiers layout */
+
+.tiers {
+  background: rgba(5, 9, 20, 0.9);
+  border-radius: 14px;
+  border: 1px solid var(--border-subtle);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Tier row (HT1, LT1, etc.) */
+
+.tier-row {
+  display: grid;
+  grid-template-columns: 90px minmax(0, 1fr);
+  gap: 8px;
+  align-items: stretch;
+}
+
+.tier-label {
+  background: var(--tier-strong);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 8px;
+  text-align: center;
+}
+
+.tier-label-main {
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.tier-label-sub {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+/* Darker for higher tiers, lighter for lower - will be tweaked via classes */
+
+.tier-row.ht {
+  background: radial-gradient(circle at left, rgba(90, 150, 255, 0.15), transparent);
+}
+
+.tier-row.lt {
+  background: radial-gradient(circle at left, rgba(144, 238, 144, 0.1), transparent);
+}
+
+.tier-items {
+  background: var(--tier-soft);
+  border-radius: 10px;
+
 
