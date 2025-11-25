@@ -131,7 +131,7 @@ body {
   background: radial-gradient(circle at left, rgba(144, 238, 144, 0.1), transparent);
 }
 
-.tier-items {
+.tier-item {
   min-width: 70px;
   padding: 4px 8px;
   border-radius: 999px;
@@ -146,6 +146,7 @@ body {
   font-size: 0.75rem;
   color: var(--text-main);
 }
+
 
 
 
