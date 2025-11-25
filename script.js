@@ -223,7 +223,7 @@ function renderGamemode(gamemodeId) {
       const hint = document.createElement("span");
       hint.style.fontSize = "0.7rem";
       hint.style.color = "var(--text-muted)";
-      hint.textContent = "No players in this tier yet.";
+      hint.textContent = "No players are currently ranked in this tier yet!";
       itemsWrap.appendChild(hint);
     } else {
       list.forEach(entry => {
