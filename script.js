@@ -46,7 +46,6 @@ const TIER_DATA = {
     HT5: [],
     LT5: [
       { name: "Volltrex" },
-      { name: "AnotherGuy" },
       { name: "xiqhos_" }
     ],
   },
