@@ -24,9 +24,17 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
-// Creates the block of tiers for each gamemode
-function baseTierBlock() {
-  return {
+// ===============================
+// TIER DATA (EDIT THIS PART)
+// ===============================
+//
+// Each gamemode has its own block.
+// Each tier is an array of { name: "PlayerName" }.
+// Add/remove players by editing these arrays.
+//
+
+const TIER_DATA = {
+  "vanilla-pvp": {
     HT1: [{ name: "Starified" }],
     LT1: [],
     HT2: [],
@@ -37,19 +45,111 @@ function baseTierBlock() {
     LT4: [],
     HT5: [],
     LT5: []
-  };
-}
+  },
 
-const TIER_DATA = {
-  "vanilla-pvp": baseTierBlock(),
-  "mace-pvp": baseTierBlock(),
-  "axe-pvp": baseTierBlock(),
-  "sword-pvp": baseTierBlock(),
-  "smp": baseTierBlock(),
-  "diamond-smp": baseTierBlock(),
-  "uhc": baseTierBlock(),
-  "pot-pvp": baseTierBlock(),
-  "neth-op": baseTierBlock()
+  "mace-pvp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "axe-pvp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "sword-pvp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "smp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "diamond-smp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "uhc": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "pot-pvp": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+
+  "neth-op": {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  }
 };
 
 // ===============================
