@@ -131,8 +131,22 @@ body {
   background: radial-gradient(circle at left, rgba(144, 238, 144, 0.1), transparent);
 }
 
-.tier-items {
-  background: var(--tier-soft);
-  border-radius: 10px;
+.tier-item {
+  min-width: 70px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tier-item-name {
+  font-size: 0.75rem;
+  color: var(--text-main);
+}
+
+
 
 
