@@ -24,20 +24,21 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
-// Name-only data (no images)
-// Starified is HT1 in every gamemode
-const baseTierBlock = () => ({
-  HT1: [{ name: "Starified" }],
-  LT1: [],
-  HT2: [],
-  LT2: [],
-  HT3: [],
-  LT3: [],
-  HT4: [],
-  LT4: [],
-  HT5: [],
-  LT5: []
-});
+// Creates the block of tiers for each gamemode
+function baseTierBlock() {
+  return {
+    HT1: [{ name: "Starified" }],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  };
+}
 
 const TIER_DATA = {
   "vanilla-pvp": baseTierBlock(),
@@ -88,7 +89,7 @@ function renderGamemode(gamemodeId) {
     const row = document.createElement("div");
     row.className = "tier-row";
 
-    // Mark HT vs LT for different glow backgrounds
+    // HT = stronger shading, LT = softer
     if (tierName.startsWith("HT")) row.classList.add("ht");
     else row.classList.add("lt");
 
@@ -123,9 +124,11 @@ function renderGamemode(gamemodeId) {
       list.forEach(entry => {
         const pill = document.createElement("div");
         pill.className = "tier-item";
+
         const name = document.createElement("div");
         name.className = "tier-item-name";
-        name.textContent = entry.name || "";
+        name.textContent = entry.name;
+
         pill.appendChild(name);
         itemsWrap.appendChild(pill);
       });
@@ -142,7 +145,7 @@ function renderGamemode(gamemodeId) {
 // ===============================
 
 document.addEventListener("DOMContentLoaded", () => {
-  const defaultId = GAMEMODES[0].id; // Vanilla PvP
+  const defaultId = GAMEMODES[0].id;
   renderTabs(defaultId);
   renderGamemode(defaultId);
 });
