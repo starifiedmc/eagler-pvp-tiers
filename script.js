@@ -47,8 +47,8 @@ const TIER_DATA = {
     LT5: [
   { name: "Volltrex" },
   { name: "AnotherGuy" }
-],
-  },
+  ],
+},
 
   "mace-pvp": {
     HT1: [{ name: "Starified" }],
