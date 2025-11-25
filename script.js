@@ -35,12 +35,128 @@ const TIER_ORDER = [
 const TIER_DATA = {
   "vanilla-pvp": {
     HT1: [
-      // Example:
-      // { name: "Player1", img: "images/vanilla_player1.png" }
+      { name: "Starified", img: "images/starified.png" }
     ],
     LT1: [],
     HT2: [],
     LT2: [],
     HT3: [],
     LT3: [],
-    HT4: []
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "mace-pvp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "axe-pvp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "sword-pvp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "smp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "diamond-smp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "uhc": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "pot-pvp": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  },
+  "neth-op": {
+    HT1: [
+      { name: "Starified", img: "images/starified.png" }
+    ],
+    LT1: [],
+    HT2: [],
+    LT2: [],
+    HT3: [],
+    LT3: [],
+    HT4: [],
+    LT4: [],
+    HT5: [],
+    LT5: []
+  }
+};
