@@ -24,8 +24,8 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
-// 🔗 EXACT URL of your tiers endpoint (paste the one that works in your browser)
-const TIERS_URL = "https://eagler-tiers-api.onrender.com/tiers";  // e.g. "https://eagler-tiers-api.onrender.com/tiers"
+// 🔗 EXACT URL of your tiers endpoint:
+const TIERS_URL = "https://eagler-tiers-api.onrender.com/tiers"; // keep this as your working /tiers URL
 
 let TIER_DATA = {};
 
@@ -78,7 +78,6 @@ function renderGamemode(gamemodeId) {
     const row = document.createElement("div");
     row.className = "tier-row";
 
-    // HT = stronger shading, LT = softer
     if (tierName.startsWith("HT")) row.classList.add("ht");
     else row.classList.add("lt");
 
@@ -119,6 +118,30 @@ function renderGamemode(gamemodeId) {
         name.textContent = entry.name;
 
         pill.appendChild(name);
+
+        // Show who last modified this player (if known)
+        if (entry.lastModifiedBy) {
+          const meta = document.createElement("div");
+          meta.className = "tier-item-meta";
+
+          // Optional: pretty date
+          let prettyDate = "";
+          if (entry.lastModifiedAt) {
+            try {
+              const d = new Date(entry.lastModifiedAt);
+              prettyDate = d.toLocaleString();
+            } catch {
+              prettyDate = "";
+            }
+          }
+
+          meta.textContent = prettyDate
+            ? `Last updated by ${entry.lastModifiedBy} on ${prettyDate}`
+            : `Last updated by ${entry.lastModifiedBy}`;
+
+          pill.appendChild(meta);
+        }
+
         itemsWrap.appendChild(pill);
       });
     }
