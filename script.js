@@ -2,7 +2,7 @@
 // CONFIG
 // ===============================
 
-// Gamemodes for tabs (same as before)
+// Gamemodes for tabs
 const GAMEMODES = [
   { id: "vanilla-pvp", name: "Vanilla PvP" },
   { id: "mace-pvp", name: "Mace PvP" },
@@ -24,7 +24,7 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
-// 👉 CHANGE THIS to your real Render URL:
+// 🔗 Base URL of your API (NO /tiers on the end!)
 const API_URL = "https://eagler-tiers-api.onrender.com";
 
 // This will be filled after we fetch from the API
@@ -37,7 +37,7 @@ let TIER_DATA = {};
 async function loadTiers() {
   const res = await fetch(`${API_URL}/tiers`);
   if (!res.ok) {
-    throw new Error("Failed to load tiers: " + res.status);
+    throw new Error("Failed to load tiers: HTTP " + res.status);
   }
   TIER_DATA = await res.json();
 }
@@ -136,11 +136,8 @@ function renderGamemode(gamemodeId) {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    // 1) load data from API
     await loadTiers();
-
-    // 2) render tabs and default gamemode
-    const defaultId = GAMEMODES[0].id;
+    const defaultId = GAMEMODES[0].id; // Vanilla PvP
     renderTabs(defaultId);
     renderGamemode(defaultId);
   } catch (err) {
