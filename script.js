@@ -24,10 +24,9 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
-// 🔗 Base URL of your API (NO /tiers on the end!)
-const API_URL = "https://eagler-tiers-api.onrender.com";
+// 🔗 EXACT URL of your tiers endpoint (paste the one that works in your browser)
+const TIERS_URL = "https://eagler-tiers-api.onrender.com/tiers";  // e.g. "https://eagler-tiers-api.onrender.com/tiers"
 
-// This will be filled after we fetch from the API
 let TIER_DATA = {};
 
 // ===============================
@@ -35,7 +34,7 @@ let TIER_DATA = {};
 // ===============================
 
 async function loadTiers() {
-  const res = await fetch(`${API_URL}/tiers`);
+  const res = await fetch(TIERS_URL);
   if (!res.ok) {
     throw new Error("Failed to load tiers: HTTP " + res.status);
   }
