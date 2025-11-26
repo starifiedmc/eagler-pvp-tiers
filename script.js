@@ -25,7 +25,7 @@ const TIER_ORDER = [
 ];
 
 // 👉 CHANGE THIS to your real Render URL:
-const API_URL = "https://eagler-tiers-api.onrender.com"; // <-- replace if different
+const API_URL = "https://eagler-tiers-api.onrender.com/tiers"; // <-- replace if different
 
 // This will be filled after we fetch from the API
 let TIER_DATA = {};
