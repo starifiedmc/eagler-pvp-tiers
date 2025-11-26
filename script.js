@@ -2,7 +2,7 @@
 // CONFIG
 // ===============================
 
-// Gamemodes for tabs
+// Gamemodes for tabs (same as before)
 const GAMEMODES = [
   { id: "vanilla-pvp", name: "Vanilla PvP" },
   { id: "mace-pvp", name: "Mace PvP" },
@@ -24,138 +24,23 @@ const TIER_ORDER = [
   "HT5", "LT5"
 ];
 
+// 👉 CHANGE THIS to your real Render URL:
+const API_URL = "https://eagler-tiers-api.onrender.com"; // <-- replace if different
+
+// This will be filled after we fetch from the API
+let TIER_DATA = {};
+
 // ===============================
-// TIER DATA (EDIT THIS PART)
+// FETCH DATA FROM API
 // ===============================
-//
-// Each gamemode has its own block.
-// Each tier is an array of { name: "PlayerName" }.
-// Add/remove players by editing these arrays.
-//
 
-const TIER_DATA = {
-  "vanilla-pvp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [
-      { name: "Volltrex" },
-      { name: "xiqhos_" }
-    ],
-  },
-
-  "mace-pvp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "axe-pvp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "sword-pvp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "smp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "diamond-smp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "uhc": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "pot-pvp": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
-  },
-
-  "neth-op": {
-    HT1: [{ name: "Starified" }],
-    LT1: [],
-    HT2: [],
-    LT2: [],
-    HT3: [],
-    LT3: [],
-    HT4: [],
-    LT4: [],
-    HT5: [],
-    LT5: [],
+async function loadTiers() {
+  const res = await fetch(`${API_URL}/tiers`);
+  if (!res.ok) {
+    throw new Error("Failed to load tiers: " + res.status);
   }
-};
-
-
+  TIER_DATA = await res.json();
+}
 
 // ===============================
 // RENDER LOGIC
@@ -208,8 +93,8 @@ function renderGamemode(gamemodeId) {
     const sub = document.createElement("div");
     sub.className = "tier-label-sub";
     sub.textContent = tierName.startsWith("HT")
-      ? "High Tier " + tierName.slice(2)
-      : "Low Tier " + tierName.slice(2);
+      ? "Higher " + tierName.slice(2)
+      : "Lower " + tierName.slice(2);
 
     label.appendChild(main);
     label.appendChild(sub);
@@ -223,7 +108,7 @@ function renderGamemode(gamemodeId) {
       const hint = document.createElement("span");
       hint.style.fontSize = "0.7rem";
       hint.style.color = "var(--text-muted)";
-      hint.textContent = "No players are currently ranked in this tier yet!";
+      hint.textContent = "No players in this tier yet.";
       itemsWrap.appendChild(hint);
     } else {
       list.forEach(entry => {
@@ -249,8 +134,17 @@ function renderGamemode(gamemodeId) {
 // INIT
 // ===============================
 
-document.addEventListener("DOMContentLoaded", () => {
-  const defaultId = GAMEMODES[0].id;
-  renderTabs(defaultId);
-  renderGamemode(defaultId);
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    // 1) load data from API
+    await loadTiers();
+
+    // 2) render tabs and default gamemode
+    const defaultId = GAMEMODES[0].id;
+    renderTabs(defaultId);
+    renderGamemode(defaultId);
+  } catch (err) {
+    console.error(err);
+    tiersRoot.textContent = "Failed to load tier data from the server.";
+  }
 });
