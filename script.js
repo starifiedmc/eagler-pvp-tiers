@@ -92,8 +92,8 @@ function renderGamemode(gamemodeId) {
     const sub = document.createElement("div");
     sub.className = "tier-label-sub";
     sub.textContent = tierName.startsWith("HT")
-      ? "Higher " + tierName.slice(2)
-      : "Lower " + tierName.slice(2);
+      ? "High Tier " + tierName.slice(2)
+      : "Low Tier " + tierName.slice(2);
 
     label.appendChild(main);
     label.appendChild(sub);
