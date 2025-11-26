@@ -1,131 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eagler PvP Tiers</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eagler PvP Tiers</title>
 
-    <link rel="stylesheet" href="style.css" />
-
-    <style>
-        body {
-            background: #0a0f1c;
-            color: white;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        #logo {
-            width: 120px;
-            height: 120px;
-            background: #111;
-            border-radius: 12px;
-        }
-
-        .title-area {
-            display: flex;
-            flex-direction: column;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 32px;
-        }
-
-        .gamemode-buttons {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .gamemode-btn {
-            background: #1a2337;
-            padding: 8px 14px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .gamemode-btn:hover,
-        .gamemode-btn.active {
-            background: #304b78;
-        }
-
-        .tier-container {
-            margin-top: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 12px;
-        }
-
-        .tier-row {
-            margin-bottom: 15px;
-            padding: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-        }
-
-        .tier-title {
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .player-badge {
-            background: rgba(255, 255, 255, 0.08);
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 8px;
-            margin-right: 8px;
-            margin-top: 5px;
-            cursor: help;
-            position: relative;
-        }
-
-        /* Tooltip */
-        .player-badge:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            top: 120%;
-            left: 0;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            white-space: pre;
-            z-index: 999;
-        }
-
-        .footer {
-            margin-top: 40px;
-            opacity: 0.5;
-        }
-    </style>
+  <!-- Your main stylesheet (keep your existing style.css) -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-    <div class="header">
-        <div id="logo"></div>
+  <div class="page">
+    <div class="app-shell">
 
-        <div class="title-area">
-            <h1>Eagler PvP Tiers</h1>
-            <div>Select a gamemode to view each tierlist.</div>
+      <!-- HEADER: logo • title • discord -->
+      <header class="top-header">
+        <!-- 256x256 logo on the left -->
+        <div class="logo-wrapper">
+          <!-- put your actual logo image here: assets/logo.png -->
+          <img src="assets/logo.png" class="main-logo" alt="Logo" />
         </div>
+
+        <!-- Title + subtitle in the center -->
+        <div class="title-wrapper">
+          <h1>Eagler PvP Tiers</h1>
+          <p>Select a gamemode to view each tierlist.</p>
+        </div>
+
+        <!-- Discord button on the right -->
+        <a
+          href="https://discord.gg/YOUR_INVITE_HERE"
+          class="discord-wrapper"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <!-- 256x256 discord icon -->
+          <img src="assets/discord.png" class="discord-logo" alt="Join Discord" />
+        </a>
+      </header>
+
+      <!-- GAMEMODE TABS -->
+      <nav id="gamemodeTabs" class="gamemode-tabs"></nav>
+
+      <!-- MAIN TIERS AREA -->
+      <main id="tiersContainer" class="tiers-shell">
+        <!-- Filled dynamically by script.js -->
+      </main>
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        Built by Starified • Hosted on GitHub Pages
+      </footer>
     </div>
+  </div>
 
-    <div class="gamemode-buttons" id="gamemodeButtons"></div>
-
-    <div id="tiers" class="tier-container"></div>
-
-    <div class="footer">Built by Starified</div>
-
-    <script src="script.js"></script>
+  <!-- Main script (version bump to bust cache) -->
+  <script src="script.js?v=5"></script>
 </body>
 </html>
