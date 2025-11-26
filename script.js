@@ -1,91 +1,174 @@
-// CHANGE THIS TO YOUR REAL API URL
-const API_URL = "https://eagler-tiers-api.onrender.com/tiers";
+// ===============================
+// CONFIG
+// ===============================
 
-let TIER_DATA = {};
-let currentGamemode = "vanilla-pvp";
-
-// All gamemodes
+// Gamemodes for tabs
 const GAMEMODES = [
-    "vanilla-pvp", "mace-pvp", "axe-pvp", "sword-pvp", "smp", "diamond-smp",
-    "uhc", "pot-pvp", "neth-op"
+  { id: "vanilla-pvp", name: "Vanilla PvP" },
+  { id: "mace-pvp", name: "Mace PvP" },
+  { id: "axe-pvp", name: "Axe PvP" },
+  { id: "sword-pvp", name: "Sword PvP" },
+  { id: "smp", name: "SMP" },
+  { id: "diamond-smp", name: "Diamond SMP" },
+  { id: "uhc", name: "UHC" },
+  { id: "pot-pvp", name: "Pot PvP" },
+  { id: "neth-op", name: "Neth OP" }
 ];
 
-// Build gamemode buttons
-const gamemodeButtons = document.getElementById("gamemodeButtons");
-GAMEMODES.forEach(mode => {
-    const btn = document.createElement("div");
-    btn.className = "gamemode-btn";
-    if (mode === currentGamemode) btn.classList.add("active");
-    btn.textContent = mode.replace("-", " ").toUpperCase();
+// Tier order top → bottom
+const TIER_ORDER = [
+  "HT1", "LT1",
+  "HT2", "LT2",
+  "HT3", "LT3",
+  "HT4", "LT4",
+  "HT5", "LT5"
+];
 
-    btn.onclick = () => {
-        document.querySelectorAll(".gamemode-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        currentGamemode = mode;
-        renderTiers();
-    };
+// 🔗 Your live API endpoint that returns tiers JSON:
+const TIERS_URL = "https://eagler-tiers-api.onrender.com/tiers"; // change if your URL is different
 
-    gamemodeButtons.appendChild(btn);
-});
+// Will be filled by API response
+let TIER_DATA = {};
 
-// Fetch data from API
+// ===============================
+// DOM ELEMENTS
+// ===============================
+
+const tabsRoot = document.getElementById("gamemodeTabs");
+const tiersRoot = document.getElementById("tiersContainer");
+
+// ===============================
+// DATA LOADING
+// ===============================
+
 async function loadTiers() {
-    try {
-        const response = await fetch(API_URL);
-        TIER_DATA = await response.json();
-        renderTiers();
-    } catch (err) {
-        document.getElementById("tiers").innerHTML = "<p>Failed to load data.</p>";
-        console.error(err);
-    }
+  const res = await fetch(TIERS_URL);
+  if (!res.ok) {
+    throw new Error("Failed to load tiers: HTTP " + res.status);
+  }
+  TIER_DATA = await res.json();
 }
 
-// Render tiers to website
-function renderTiers() {
-    const container = document.getElementById("tiers");
-    container.innerHTML = "";
+// ===============================
+// RENDER TABS
+// ===============================
 
-    const modeData = TIER_DATA[currentGamemode];
-    if (!modeData) {
-        container.innerHTML = "<p>No data for this gamemode.</p>";
-        return;
-    }
+function renderTabs(activeId) {
+  tabsRoot.innerHTML = "";
 
-    const TIERS = ["HT1", "LT1", "HT2", "LT2", "HT3", "LT3", "HT4", "LT4", "HT5", "LT5"];
+  GAMEMODES.forEach(gm => {
+    const btn = document.createElement("button");
+    btn.className = "gamemode-tab";
+    if (gm.id === activeId) btn.classList.add("active");
+    btn.textContent = gm.name;
 
-    TIERS.forEach(tier => {
-        const row = document.createElement("div");
-        row.className = "tier-row";
+    btn.addEventListener("click", () => {
+      renderTabs(gm.id);
+      renderGamemode(gm.id);
+    });
 
-        const title = document.createElement("div");
-        title.className = "tier-title";
-        title.textContent = tier;
+    tabsRoot.appendChild(btn);
+  });
+}
 
-        row.appendChild(title);
+// ===============================
+// RENDER A SINGLE GAMEMODE
+// ===============================
 
-        const players = modeData[tier] || [];
+function renderGamemode(gamemodeId) {
+  const gmData = TIER_DATA[gamemodeId];
+  tiersRoot.innerHTML = "";
 
-        if (players.length === 0) {
-            row.innerHTML += "<div>No players in this tier yet.</div>";
-        } else {
-            players.forEach(player => {
-                const badge = document.createElement("span");
-                badge.className = "player-badge";
+  if (!gmData) {
+    tiersRoot.textContent = "No data for this gamemode yet.";
+    return;
+  }
 
-                badge.textContent = player.name;
+  TIER_ORDER.forEach(tierName => {
+    const row = document.createElement("div");
+    row.className = "tier-row";
 
-                // Tooltip with last update info
-                badge.setAttribute(
-                    "data-tooltip",
-                    `Last updated by ${player.updatedBy}\n${player.updatedAt}`
-                );
+    // side label (HT1 / LT1 etc.)
+    const label = document.createElement("div");
+    label.className = "tier-label";
 
-                row.appendChild(badge);
-            });
+    const main = document.createElement("div");
+    main.className = "tier-label-main";
+    main.textContent = tierName;
+
+    const sub = document.createElement("div");
+    sub.className = "tier-label-sub";
+    sub.textContent = tierName.startsWith("HT")
+      ? "Higher " + tierName.slice(2)
+      : "Lower " + tierName.slice(2);
+
+    label.appendChild(main);
+    label.appendChild(sub);
+
+    const itemsWrap = document.createElement("div");
+    itemsWrap.className = "tier-items";
+
+    const list = gmData[tierName] || [];
+
+    if (list.length === 0) {
+      const hint = document.createElement("span");
+      hint.style.fontSize = "0.8rem";
+      hint.style.color = "var(--text-muted, #6b7280)";
+      hint.textContent = "No players in this tier yet.";
+      itemsWrap.appendChild(hint);
+    } else {
+      list.forEach(entry => {
+        const pill = document.createElement("div");
+        pill.className = "tier-item";
+
+        const nameEl = document.createElement("div");
+        nameEl.className = "tier-item-name";
+        nameEl.textContent = entry.name;
+
+        // Tooltip with last updated info (shown only on hover)
+        if (entry.lastModifiedBy) {
+          let prettyDate = "";
+          if (entry.lastModifiedAt) {
+            try {
+              const d = new Date(entry.lastModifiedAt);
+              prettyDate = d.toLocaleString();
+            } catch {
+              // ignore parse errors
+            }
+          }
+
+          let tooltip = `Last updated by ${entry.lastModifiedBy}`;
+          if (prettyDate) {
+            tooltip += ` on ${prettyDate}`;
+          }
+
+          // Use browser's native tooltip
+          pill.title = tooltip;
         }
 
-        container.appendChild(row);
-    });
+        pill.appendChild(nameEl);
+        itemsWrap.appendChild(pill);
+      });
+    }
+
+    row.appendChild(label);
+    row.appendChild(itemsWrap);
+    tiersRoot.appendChild(row);
+  });
 }
 
-loadTiers();
+// ===============================
+// INIT
+// ===============================
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    await loadTiers();
+    const defaultId = GAMEMODES[0].id; // Vanilla PvP
+    renderTabs(defaultId);
+    renderGamemode(defaultId);
+  } catch (err) {
+    console.error(err);
+    tiersRoot.textContent = "Failed to load tier data from the server.";
+  }
+});
